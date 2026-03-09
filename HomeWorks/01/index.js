@@ -1,10 +1,3 @@
-#!/usr/bin/env node
-
-/**
- * Программа для вычисления корней квадратного уравнения ax^2 + bx + c = 0.
- * Аргументы передаются через командную строку.
- */
-
 // Функция для вывода справки
 function printHelp() {
     const helpText = `
@@ -31,25 +24,25 @@ function printHelp() {
 
 // Функция для решения квадратного уравнения
 function solveQuadratic(a, b, c) {
-    // Проверка на вырожденные случаи
+
     if (a === 0) {
-        // Линейное уравнение bx + c = 0
+    
         if (b === 0) {
             // 0*x + c = 0
             if (c === 0) {
-                // Бесконечное множество решений
+                
                 return { count: Infinity, roots: [] };
             } else {
-                // Корней нет
+                
                 return { count: 0, roots: [] };
             }
         } else {
-            // Один корень линейного уравнения
+            
             const x = -c / b;
             return { count: 1, roots: [x] };
         }
     } else {
-        // Квадратное уравнение
+        
         const discriminant = b * b - 4 * a * c;
         
         if (discriminant < 0) {
@@ -61,14 +54,12 @@ function solveQuadratic(a, b, c) {
             const sqrtD = Math.sqrt(discriminant);
             const x1 = (-b + sqrtD) / (2 * a);
             const x2 = (-b - sqrtD) / (2 * a);
-            // Сортируем корни для красоты
             const roots = [x1, x2].sort((x, y) => x - y);
             return { count: 2, roots };
         }
     }
 }
 
-// Главная функция
 function main() {
     // Получаем аргументы командной строки (пропускаем первые два: node и имя скрипта)
     const args = process.argv.slice(2);
