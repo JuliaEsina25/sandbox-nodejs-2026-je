@@ -4,15 +4,15 @@ function printHelp() {
 Калькулятор корней квадратного уравнения
 
 Использование:
-  node quadratic-solver.js <a> <b> <c>
+  node index.js <a> <b> <c>
 
 Где:
   a, b, c - коэффициенты квадратного уравнения (вещественные числа).
 
 Примеры:
-  node quadratic-solver.js 1 -3 2    # Два корня (x1=2, x2=1)
-  node quadratic-solver.js 1 -2 1    # Один корень (x=1)
-  node quadratic-solver.js 1 0 1     # Корней нет (комплексные корни)
+  node index.js 1 -3 2    # Два корня (x1=2, x2=1)
+  node index.js 1 -2 1    # Один корень (x=1)
+  node index.js 1 0 1     # Корней нет (комплексные корни)
 
 Коды возврата:
   0 - Успех, корни найдены и выведены в stdout.
