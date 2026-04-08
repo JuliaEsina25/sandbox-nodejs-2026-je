@@ -1,60 +1,53 @@
+import DataSource from "./dataSource.js";
+const dataSource = new DataSource('db/database.json');
+
 export const booksHandler = (req, res) => {
 
   const {method, url} = req;
 
-  console.log('url ==', url);
+  //console.log('url ==', url);
       const urlSplitted = url.split('?');
       const urlString = urlSplitted[0];
-      const queryString = urlSplitted[1];
-
+      const queryString = urlSplitted[1]; //FIXME:
+      
       const urlArr = urlString.split('/');
-          //console.log('urlArr', urlArr, urlArr.length);
+
+    //console.log('urlArr', urlArr, urlArr.length);
 
       let id = null;
       if(urlArr.length === 4) {
         id = +urlArr[urlArr.length-1]; //FIXME:
       }
+  let re = null;    
 
   switch (method) {
     case 'POST':
+      dataSource.create({name: 'HardCode Name', author: 'HardCode Author', description: 'HardCode'     }); //Fixme: HARDCODE!
+      re = dataSource.getOne(id);
       res.writeHead(201, {'Content-Type': 'application/json'});
-      res.end(`{
-    "id": 1,
-    "name":"Преступление и наказание",
-    "author":"Ф.М.Достоевский",
-    "description":"Это произведение перешло в общественное достояние. Произведение написано автором, умершим более семидесяти лет назад, и опубликовано прижизненно, либо посмертно, но с момента публикации также прошло более семидесяти лет. Оно может свободно использоваться любым лицом без чьего-либо согласия или разрешения и без выплаты авторского вознаграждения."
-}`); 
+      res.end(re); 
       return;
     case 'GET':
       if(id) {
+       re = JSON.stringify(DataSource.getOne(id));
        res.writeHead(200, {'Content-Type': 'application/json'});
-       res.end(`{
-    "id": 1,
-    "name":"Преступление и наказание",
-    "author":"Ф.М.Достоевский",
-    "description":"Это произведение перешло в общественное достояние. Произведение написано автором, умершим более семидесяти лет назад, и опубликовано прижизненно, либо посмертно, но с момента публикации также прошло более семидесяти лет. Оно может свободно использоваться любым лицом без чьего-либо согласия или разрешения и без выплаты авторского вознаграждения."
-      }`); 
+       res.end(re);
       } else {
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(`[{
-    "id": 1,
-    "name":"Преступление и наказание",
-    "author":"Ф.М.Достоевский",
-    "description":"Это произведение перешло в общественное достояние. Произведение написано автором, умершим более семидесяти лет назад, и опубликовано прижизненно, либо посмертно, но с момента публикации также прошло более семидесяти лет. Оно может свободно использоваться любым лицом без чьего-либо согласия или разрешения и без выплаты авторского вознаграждения."
-      }]`); 
+       re = JSON.stringify(DataSource.getOne());
+       res.writeHead(200, {'Content-Type': 'application/json'});
+       res.end(re);
       }
       return;
     case 'PATCH':
     case 'PUT':
-        res.writeHead(200, {'Content-Type': 'application/json'});
-          res.end(`{
-   "id": 1,
-   "name":"Преступление и наказание!",
-   "author":"Ф.М.Достоевский",
-   "description":"Это произведение перешло в общественное достояние. Произведение написано автором, умершим более семидесяти лет назад, и опубликовано прижизненно, либо посмертно, но с момента публикации также прошло более семидесяти лет. Оно может свободно использоваться любым лицом без чьего-либо согласия или разрешения и без выплаты авторского вознаграждения."
-}`); 
+      dataSource.update(id, {author: 'HardCode Descr'}); //Fixme: HARDCODE!
+      re = dataSource.getOne(id);
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.end(re);
+ 
       return; 
-    case 'DELETE':    
+    case 'DELETE':
+      dataSource.delete(id);    
       res.writeHead(204);
       res.end(null);
       return;         

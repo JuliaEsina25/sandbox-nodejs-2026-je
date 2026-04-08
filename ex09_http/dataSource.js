@@ -1,7 +1,7 @@
 import {existsSync, writeFileSync, mkdirSync, readFileSync} from "node:fs";
 import{dirname} from "node:path"
 export default class DataSource {
-    storage = [{id: 1}, {id: 2}];
+    storage = [];
     dbFile = null;
 
     constructor(dbFile) {
