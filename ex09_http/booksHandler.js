@@ -3,7 +3,7 @@ const dataSource = new DataSource('db/database.json');
 
 export const booksHandler = (req, res) => {
 
-  const {method, url} = req;
+  const { method, url } = req;
 
   //console.log('url ==', url);
   const urlSplitted = url.split('?');
