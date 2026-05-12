@@ -7,7 +7,7 @@
 import app from '../app.js';
 import createdebugMessages  from 'debug';
 
-const debug = createdebugMessages('ex10-express:server');
+const debug = createdebugMessages('ex12-express-sql:server');
 import http from 'node:http';
 
 /**
